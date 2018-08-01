@@ -61,6 +61,11 @@ class Job
     private $isActive;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $jobUniqueId;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -169,6 +174,22 @@ class Job
         $this->isActive = $isActive;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJobUniqueId()
+    {
+        return $this->jobUniqueId;
+    }
+
+    /**
+     * @param mixed $jobUniqueId
+     */
+    public function setJobUniqueId($jobUniqueId): void
+    {
+        $this->jobUniqueId = $jobUniqueId;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface

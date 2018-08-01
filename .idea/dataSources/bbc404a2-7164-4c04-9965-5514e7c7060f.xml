@@ -1075,169 +1075,174 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="264" parent="244" name="created_at">
+    <column id="264" parent="244" name="job_unique_id">
       <Position>10</Position>
+      <DataType>longtext|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="265" parent="244" name="created_at">
+      <Position>11</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="265" parent="244" name="updated_at">
-      <Position>11</Position>
+    <column id="266" parent="244" name="updated_at">
+      <Position>12</Position>
       <DataType>datetime|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="266" parent="244" name="IDX_FBD8E0F85FA33B08">
+    <index id="267" parent="244" name="IDX_FBD8E0F85FA33B08">
       <ColNames>job_type_id</ColNames>
     </index>
-    <index id="267" parent="244" name="IDX_FBD8E0F8294CCED">
+    <index id="268" parent="244" name="IDX_FBD8E0F8294CCED">
       <ColNames>category_type_id</ColNames>
     </index>
-    <index id="268" parent="244" name="IDX_FBD8E0F898260155">
+    <index id="269" parent="244" name="IDX_FBD8E0F898260155">
       <ColNames>region_id</ColNames>
     </index>
-    <index id="269" parent="244" name="IDX_FBD8E0F8A76ED395">
+    <index id="270" parent="244" name="IDX_FBD8E0F8A76ED395">
       <ColNames>user_id</ColNames>
     </index>
-    <key id="270" parent="244" name="PRIMARY">
+    <key id="271" parent="244" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="271" parent="244" name="FK_FBD8E0F85FA33B08">
+    <foreign-key id="272" parent="244" name="FK_FBD8E0F85FA33B08">
       <ColNames>job_type_id</ColNames>
       <RefSchemaName>myhammer</RefSchemaName>
       <RefTableName>job_type</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="272" parent="244" name="FK_FBD8E0F8294CCED">
+    <foreign-key id="273" parent="244" name="FK_FBD8E0F8294CCED">
       <ColNames>category_type_id</ColNames>
       <RefSchemaName>myhammer</RefSchemaName>
       <RefTableName>category_type</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="273" parent="244" name="FK_FBD8E0F898260155">
+    <foreign-key id="274" parent="244" name="FK_FBD8E0F898260155">
       <ColNames>region_id</ColNames>
       <RefSchemaName>myhammer</RefSchemaName>
       <RefTableName>region</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="274" parent="244" name="FK_FBD8E0F8A76ED395">
+    <foreign-key id="275" parent="244" name="FK_FBD8E0F8A76ED395">
       <ColNames>user_id</ColNames>
       <RefSchemaName>myhammer</RefSchemaName>
       <RefTableName>user</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="275" parent="245" name="id">
+    <column id="276" parent="245" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="276" parent="245" name="title">
+    <column id="277" parent="245" name="title">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="277" parent="245" name="is_active">
+    <column id="278" parent="245" name="is_active">
       <Position>3</Position>
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="278" parent="245" name="created_at">
+    <column id="279" parent="245" name="created_at">
       <Position>4</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="279" parent="245" name="updated_at">
+    <column id="280" parent="245" name="updated_at">
       <Position>5</Position>
       <DataType>datetime|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="280" parent="245" name="PRIMARY">
+    <key id="281" parent="245" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="281" parent="246" name="version">
+    <column id="282" parent="246" name="version">
       <Position>1</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="282" parent="246" name="PRIMARY">
+    <key id="283" parent="246" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>version</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="283" parent="247" name="id">
+    <column id="284" parent="247" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="284" parent="247" name="zip_code">
+    <column id="285" parent="247" name="zip_code">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="285" parent="247" name="city">
+    <column id="286" parent="247" name="city">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="247" name="country">
+    <column id="287" parent="247" name="country">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="287" parent="247" name="PRIMARY">
+    <key id="288" parent="247" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="288" parent="248" name="id">
+    <column id="289" parent="248" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="289" parent="248" name="name">
+    <column id="290" parent="248" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="290" parent="248" name="email">
+    <column id="291" parent="248" name="email">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="291" parent="248" name="is_active">
+    <column id="292" parent="248" name="is_active">
       <Position>4</Position>
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="292" parent="248" name="created_at">
+    <column id="293" parent="248" name="created_at">
       <Position>5</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="293" parent="248" name="updated_at">
+    <column id="294" parent="248" name="updated_at">
       <Position>6</Position>
       <DataType>datetime|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="294" parent="248" name="PRIMARY">
+    <key id="295" parent="248" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
