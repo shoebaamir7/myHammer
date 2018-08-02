@@ -29,6 +29,12 @@ class CategoryType
     private $isActive;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $categoryUniqueId;
+
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -75,6 +81,22 @@ class CategoryType
         $this->isActive = $isActive;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoryUniqueId()
+    {
+        return $this->categoryUniqueId;
+    }
+
+    /**
+     * @param mixed $categoryUniqueId
+     */
+    public function setCategoryUniqueId($categoryUniqueId): void
+    {
+        $this->categoryUniqueId = $categoryUniqueId;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface

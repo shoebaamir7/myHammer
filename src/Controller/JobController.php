@@ -11,6 +11,7 @@ use App\Repository\JobRepository;
 use App\Repository\JobTypeRepository;
 use App\Repository\RegionRepository;
 use App\Repository\UserRepository;
+use App\Service\JobService;
 use DateTime;
 use Exception;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -52,21 +53,29 @@ class JobController extends FOSRestController
     public $regionRepository;
 
     /**
+     * @var JobService
+     */
+    public $jobService;
+
+    /**
      * JobController constructor.
      * @param JobRepository $jobRepository
      * @param UserRepository $userRepository
      * @param CategoryTypeRepository $categoryTypeRepository
      * @param JobTypeRepository $jobTypeRepository
      * @param RegionRepository $regionRepository
+     * @param JobService $jobService
      */
-    public function __construct(JobRepository $jobRepository, UserRepository $userRepository, CategoryTypeRepository $categoryTypeRepository, JobTypeRepository $jobTypeRepository, RegionRepository $regionRepository)
+    public function __construct(JobRepository $jobRepository, UserRepository $userRepository, CategoryTypeRepository $categoryTypeRepository, JobTypeRepository $jobTypeRepository, RegionRepository $regionRepository, JobService $jobService)
     {
         $this->jobRepository = $jobRepository;
         $this->userRepository = $userRepository;
         $this->categoryTypeRepository = $categoryTypeRepository;
         $this->jobTypeRepository = $jobTypeRepository;
         $this->regionRepository = $regionRepository;
+        $this->jobService = $jobService;
     }
+
 
     /**
      * Creates a job
@@ -78,38 +87,44 @@ class JobController extends FOSRestController
     {
         try {
             $requestData = $request->request->all();
-            $this->checkValidations($requestData);
-            $jobDate = new DateTime($requestData['jobDate']);
-            $jobDate->format('Y-m-d H:i:s');
-            $job = new Job();
-            $job->setTitle($requestData['title']);
-            $job->setDescription($requestData['description']);
-            $job->setJobDate($jobDate);
-            $job->setJobUniqueId(random_bytes(10));
-            $job->setCreatedAt(new DateTime());
-            $job->setUpdatedAt(new DateTime());
-            $job->setIsActive(true);
-            /** @var User $user */
-            $user = $this->userRepository->find(1);
-            $job->setUser($user);
-
-            /** @var CategoryTypeRepository $categoryType */
-            $categoryType = $this->categoryTypeRepository->find(1);
-            $job->setCategoryType($categoryType);
-
-            /** @var JobType $jobType */
-            $jobType = $this->jobTypeRepository->find(1);
-            $job->setJobType($jobType);
-
-            /** @var Region $region */
-            $region = $this->regionRepository->find(1);
-            $job->setRegion($region);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($job);
-            $em->flush();
-
+            $this->requestValidations($requestData);
+            $this->jobService->create($requestData);
             return new JsonResponse(['code' => Response::HTTP_OK, 'message' => 'Job created successfully.']);
+        } catch (Exception $exception) {
+            return new JsonResponse(['code' => Response::HTTP_BAD_REQUEST, 'message' => $exception->getMessage()]);
+        }
+    }
+
+    /**
+     * Creates a job
+     * @Rest\Post("/job/edit")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function postJobEditAction(Request $request)
+    {
+        try {
+            $requestData = $request->request->all();
+            $this->requestValidations($requestData);
+            $this->jobService->edit($requestData);
+            return new JsonResponse(['code' => Response::HTTP_OK, 'message' => 'Job saved successfully.']);
+        } catch (Exception $exception) {
+            return new JsonResponse(['code' => Response::HTTP_BAD_REQUEST, 'message' => $exception->getMessage()]);
+        }
+    }
+
+    /**
+     * Creates a job
+     * @Rest\Post("/jobs", name="show-jobs")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function postJobShowAction(Request $request)
+    {
+        try {
+            $requestData = $request->request->all();
+            $jobs = $this->jobService->showAllJobs($requestData);
+            return new JsonResponse(['code' => Response::HTTP_OK, 'jobs' => $jobs]);
         } catch (Exception $exception) {
             return new JsonResponse(['code' => Response::HTTP_BAD_REQUEST, 'message' => $exception->getMessage()]);
         }
@@ -119,10 +134,14 @@ class JobController extends FOSRestController
      * @param array $data
      * @throws Exception
      */
-    public function checkValidations(array $data)
+    public function requestValidations(array $data)
     {
         if(empty($data['title'])) {
-            throw new Exception('Title is required.');
+            throw new Exception('Title is invalid.');
+        }
+
+        if(strlen($data['title']) < 5 || strlen($data['title']) > 50) {
+            throw new Exception('Title should be between 5 and 50 characters');
         }
 
         if(empty($data['description'])) {

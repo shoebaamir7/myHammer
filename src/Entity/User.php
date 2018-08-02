@@ -34,6 +34,12 @@ class User
     private $isActive;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $role;
+
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -119,6 +125,22 @@ class User
         $this->isActive = $isActive;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param string $role
+     */
+    public function setRole($role): void
+    {
+        $this->role = $role;
     }
 
     /**
