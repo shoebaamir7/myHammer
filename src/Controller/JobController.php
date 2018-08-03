@@ -26,32 +26,6 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  */
 class JobController extends FOSRestController
 {
-
-    /**
-     * @var JobRepository $jobRepository
-     */
-    public $jobRepository;
-
-    /**
-     * @var UserRepository $userRepository
-     */
-    public $userRepository;
-
-    /**
-     * @var CategoryTypeRepository $categoryTypeRepository
-     */
-    public $categoryTypeRepository;
-
-    /**
-     * @var JobTypeRepository $jobTypeRepository
-     */
-    public $jobTypeRepository;
-
-    /**
-     * @var RegionRepository $regionRepository
-     */
-    public $regionRepository;
-
     /**
      * @var JobService
      */
@@ -59,23 +33,12 @@ class JobController extends FOSRestController
 
     /**
      * JobController constructor.
-     * @param JobRepository $jobRepository
-     * @param UserRepository $userRepository
-     * @param CategoryTypeRepository $categoryTypeRepository
-     * @param JobTypeRepository $jobTypeRepository
-     * @param RegionRepository $regionRepository
      * @param JobService $jobService
      */
-    public function __construct(JobRepository $jobRepository, UserRepository $userRepository, CategoryTypeRepository $categoryTypeRepository, JobTypeRepository $jobTypeRepository, RegionRepository $regionRepository, JobService $jobService)
+    public function __construct(JobService $jobService)
     {
-        $this->jobRepository = $jobRepository;
-        $this->userRepository = $userRepository;
-        $this->categoryTypeRepository = $categoryTypeRepository;
-        $this->jobTypeRepository = $jobTypeRepository;
-        $this->regionRepository = $regionRepository;
         $this->jobService = $jobService;
     }
-
 
     /**
      * Creates a job
@@ -124,7 +87,7 @@ class JobController extends FOSRestController
         try {
             $requestData = $request->request->all();
             $jobs = $this->jobService->showAllJobs($requestData);
-            return new JsonResponse(['code' => Response::HTTP_OK, 'jobs' => $jobs]);
+            return new JsonResponse(['code' => Response::HTTP_OK, 'message' => Response::$statusTexts[Response::HTTP_OK], 'jobs' => $jobs]);
         } catch (Exception $exception) {
             return new JsonResponse(['code' => Response::HTTP_BAD_REQUEST, 'message' => $exception->getMessage()]);
         }
